@@ -19,7 +19,9 @@ setup(
     package_dir={"": "src"},
     python_requires=">=3.5",
     setup_requires=[
-        "pytest-runner"
+        "pytest-runner",
+        "pandas >= 0.24.2",
+        "requests >= 2.22.0"
     ],
     tests_require=[
         "pytest",
