@@ -4,6 +4,7 @@ from pytest import raises
 from src.fantasyprem.api_connectors.event import EventConnection
 from src.fantasyprem.api_connectors.player import PlayerConnection
 from src.fantasyprem.api_connectors.player_summary import PlayerSummaryConnection
+from src.fantasyprem.api_connectors.team import TeamConnection
 
 
 def test_get_player_summary_content():
@@ -42,6 +43,17 @@ def test_get_event_content():
     Tests that the API returns a list of dictionaries
     """
     con = EventConnection()
+    content = con.get_content()
+    assert all(isinstance(item, dict) for item in content)
+    content = con.get_content(as_pandas=True)
+    assert type(content) is DataFrame
+
+
+def test_get_team_content():
+    """
+    Tests that the API returns a list of dictionaries and a pandas Dataframe for the team connection
+    """
+    con = TeamConnection()
     content = con.get_content()
     assert all(isinstance(item, dict) for item in content)
     content = con.get_content(as_pandas=True)
